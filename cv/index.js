@@ -60,4 +60,66 @@ class CV {
             (educationElement) => educationElement.id !== education.id
         )
     }
+
+    renderCV() {
+        const email = document.getElementById('email')
+        const jobs = document.getElementById('jobs')
+        const educations = document.getElementById('education')
+
+        email.innerHTML = this.email
+
+        this.jobs.forEach((job) => {
+            const jobItem = document.createElement('li')
+            jobItem.innerHTML = `
+            <div>Title: ${job.title}</div>
+            <div>Description ${job.description}</div>
+            <div>Start date: ${job.startDate}</div>
+            `
+
+            jobs.appendChild(jobItem)
+        })
+
+        this.educations.forEach((education) => {
+            const educationItem = document.createElement('li')
+            educationItem.innerHTML = `
+            <div>Title: ${education.title}</div>
+            <div>School ${education.school}</div>
+            <div>Start date: ${education.startDate}</div>
+            `
+
+            educations.appendChild(educationItem)
+        })
+    }
 }
+
+const myCV = new CV('superguygreatdude@aol.io')
+
+const cookJob = new Job(
+    'cook',
+    'served customers food',
+    'sept 2014',
+    'sept 2016'
+)
+const salesJob = new Job(
+    'sales rep',
+    'sold cellphones',
+    'sept 2016',
+    'sept 2018'
+)
+
+myCV.addJob(cookJob)
+myCV.addJob(salesJob)
+
+const highSchool = new Education(
+    'highschool',
+    'Myer',
+    'niagara falls',
+    'sept 2013',
+    'sept 2014'
+)
+
+myCV.addEducation(highSchool)
+
+myCV.removeJob(cookJob)
+
+myCV.renderCV()
